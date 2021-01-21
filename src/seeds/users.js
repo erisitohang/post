@@ -9,7 +9,14 @@ exports.seed = function (knex) {
       // Inserts seed entries
       const users = [];
       let user = {};
-      for (let i = 1; i <= 20; i += 1) {
+
+      user = {
+        name: faker.name.findName(),
+        email: 'user@example.com',
+        password: bcrypt.hashSync('password123', 10),
+      };
+      users.push(user);
+      for (let i = 2; i <= 20; i += 1) {
         user = {
           name: faker.name.findName(),
           email: faker.internet.email(),

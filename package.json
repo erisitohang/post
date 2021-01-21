@@ -6,9 +6,12 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "db:migrate": "knex --knexfile ./configs/db.js migrate:latest",
-    "db:seed": "knex --knexfile ./configs/db.js seed:run",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:setup": "npm run db:migrate && npm run db:seed",
+    "db:migrate": "knex --knexfile ./src/configs/db.js migrate:latest",
+    "db:seed": "knex --knexfile ./src/configs/db.js seed:run",
+    "db:rollback": "knex --knexfile ./src/configs/db.js migrate:rollback",
+    "test:fresh": "NODE_ENV=test npm run db:rollback && NODE_ENV=test npm run db:setup && PORT=8001 NODE_ENV=test  mocha --exit \"test/**/*.spec.js\"",
+    "test": "PORT=8001 NODE_ENV=test  mocha --exit \"test/**/*.spec.js\""
   },
   "engines": {
     "node": "14.15.3",
@@ -17,12 +20,18 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.16",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "validator": "^13.5.2"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "faker": "^5.1.0",
-    "nodemon": "^2.0.7"
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.1"
   }
 }

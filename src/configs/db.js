@@ -1,10 +1,16 @@
 const { join } = require('path');
+const {
+  DB_HOST,
+  DB_USERNAME,
+  DB_PASSWORD,
+  DB_NAME,
+} = require('../configs/env');
 
 const connection = {
-  host: 'us-cdbr-east-03.cleardb.com',
-  user: 'b14ea8853958c0',
-  password: '89ba0fd4',
-  database: 'heroku_2234a1f8da5e672',
+  host: DB_HOST,
+  user: DB_USERNAME,
+  password: DB_PASSWORD,
+  database: DB_NAME,
 };
 
 const knex = {
