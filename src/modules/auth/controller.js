@@ -8,13 +8,13 @@ const validator = require('validator');
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password || !validator.isEmail(email)) {
-    res.status(422).send({});
+    res.status(422).send();
     return;
   }
 
   const user = await service.authenticate(email, password);
   if (!user) {
-    res.status(401).send({});
+    res.status(401).send();
     return;
   }
 
@@ -28,12 +28,12 @@ const login = catchAsync(async (req, res) => {
 const register = catchAsync(async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password || !validator.isEmail(email)) {
-    res.status(422).send({});
+    res.status(422).send();
     return;
   }
 
-  const user = await service.addUser(name, email, password);
-  res.status(201).send({});
+  await service.addUser(name, email, password);
+  res.status(201).send();
 });
 
 module.exports = {

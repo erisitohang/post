@@ -27,9 +27,8 @@ const generateToken = (user) => {
 
 const addUser = async (name, email, password) => {
   const hashPassword = bcrypt.hashSync(password, 10);
-  const user = await userRepository.insert(name, email, hashPassword);
 
-  return user;
+  return await userRepository.insert(name, email, hashPassword);
 };
 
 module.exports = {

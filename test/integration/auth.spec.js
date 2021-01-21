@@ -55,7 +55,6 @@ describe('POST /auth/login', function () {
       .expect(200)
       .end(function (err, res) {
         if (err) return done(err);
-        //const { access_token, access_token_expiry } = JSON.parse(res.text);
         return done();
       });
   });
