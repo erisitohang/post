@@ -4,6 +4,8 @@ const verifyToken = require('./middleware/authenticate');
 
 const auth = require('./modules/auth/controller');
 const posts = require('./modules/posts/controller');
+const followers = require('./modules/followers/controller');
+const likes = require('./modules/likes/controller');
 
 module.exports = (app) => {
   app.use('/api', router);
@@ -15,4 +17,8 @@ module.exports = (app) => {
   router.get('/posts/:id', verifyToken, posts.read);
   router.put('/posts', verifyToken, posts.update);
   router.delete('/posts/:id', verifyToken, posts.remove);
+  router.post('/followers', verifyToken, followers.store);
+  router.delete('/followers/:id', verifyToken, followers.remove);
+  router.post('/likes', verifyToken, likes.store);
+  router.delete('/likes/:id', verifyToken, likes.remove);
 };
